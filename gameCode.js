@@ -36,7 +36,7 @@ switch (event) {
                         ok = isAnswer(works.d0, event);
                     }
                 } while (!ok);
-
+                answers.push(event);
                 break;
             case 2: // Второе действие   Если ввели 2 то также переходим на 4 окно
                 do {
@@ -49,7 +49,7 @@ switch (event) {
                         ok = isAnswer(works.d0, event);
                     }
                 } while (!ok);
-
+                answers.push(event);
                 break;
             case -1: // Второе действие
                 break;
@@ -81,7 +81,7 @@ switch (event) {
                         ok = isAnswer(works.d0, event);
                     }
                 } while (!ok);
-
+                answers.push(event);
                 break;
             case 2: // Второе действие
                 do {
@@ -94,7 +94,7 @@ switch (event) {
                         ok = isAnswer(works.d0, event);
                     }
                 } while (!ok);
-
+                answers.push(event);
                 break;
             case -1: // Второе действие
                 break;
@@ -128,7 +128,7 @@ function showMeMyWay(answers) {
     var stage, question, answer;
     do {
         stage = Math.round(+prompt("Введите номер вопроса: "));
-    } while(stage < 1 && stage > answers.length-1);
+    } while(!isAnswer(answers.length, stage));
     switch(stage) {
         case 1: 
             question = works.a00;
@@ -142,28 +142,29 @@ function showMeMyWay(answers) {
             }
             break;
         case 2:
-            question = works.b00;
-            switch(answers[stage-1]) {
-                case 1:
-                    answer = works.b1;
-                    break;
-                case 2:
-                    answer = works.b2;
-                    break;
+            if(answers[0] == 1) {
+                question = works.b00;
+                switch(answers[stage-1]) {
+                    case 1:
+                        answer = works.b1;
+                        break;
+                    case 2:
+                        answer = works.b2;
+                        break;
+                }
+            } else {
+                question = works.c00;
+                switch(answers[stage-1]) {
+                    case 1:
+                        answer = works.c1;
+                        break;
+                    case 2:
+                        answer = works.c2;
+                        break;
+                }
             }
             break;
         case 3:
-            question = works.c00;
-            switch(answers[stage-1]) {
-                case 1:
-                    answer = works.c1;
-                    break;
-                case 2:
-                    answer = works.c2;
-                    break;
-            }
-            break;
-        case 4:
             question = works.d00;
             switch(answers[stage-1]) {
                 case 1:
@@ -175,5 +176,6 @@ function showMeMyWay(answers) {
             }
             break;
     }
-    alert("На вопрос " + question + "Вы ответили: " + answer);
+    if(answer === undefined) answer = "Вы не ответили";
+    alert("На вопрос:\n" + question + "Вы ответили: " + answer);
 }
