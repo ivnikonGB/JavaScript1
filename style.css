@@ -1,0 +1,16 @@
+.basket {
+    background-color: #cccccc;
+    height: 200px;
+}
+
+.goods {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
